@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Interligações em Formulários — Vue.js</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Vue.js - O Framework JavaScript Progressivo">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link rel="alternate" hreflang="x-default" href="https://vuejs.org/v2/guide/forms.html">
+        <link rel="alternate" hreflang="zh" href="https://cn.vuejs.org/v2/guide/forms.html">
+        <link rel="alternate" hreflang="ja" href="https://jp.vuejs.org/v2/guide/forms.html">
+        <link rel="alternate" hreflang="ru" href="https://ru.vuejs.org/v2/guide/forms.html">
+        <link rel="alternate" hreflang="ko" href="https://kr.vuejs.org/v2/guide/forms.html">
+        <link rel="alternate" hreflang="pt-BR" href="https://br.vuejs.org/v2/guide/forms.html">
+        <link rel="alternate" hreflang="fr" href="https://fr.vuejs.org/v2/guide/forms.html">
+
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="Interligações em Formulários — Vue.js">
+        <meta property="og:description" content="Vue.js - O Framework JavaScript Progressivo">
+        <meta property="og:image" content="https://br.vuejs.org//images/logo.png">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Interligações em Formulários — Vue.js">
+        <meta name="twitter:description" content="Vue.js - O Framework JavaScript Progressivo">
+        <meta name="twitter:image" content="https://br.vuejs.org/images/logo.png">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+        <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+        <link rel="icon" href="/images/logo.png" type="image/png">
+
+        <meta name="msapplication-TileColor" content="#4fc08d">
+        <meta name="theme-color" content="#4fc08d">
+
+        <meta name="msapplication-config" content="browserconfig.xml">
+        <link rel="manifest" href="/manifest.json">
+
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- main page styles -->
+        <link rel="stylesheet" href="/css/page.css">
+
+        <!-- this needs to be loaded before guide's inline scripts -->
+        <script src="/js/vue.js"></script>
+        <script>window.PAGE_TYPE = "guide"</script>
+
+        <!-- ga -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-46852172-1', 'br.vuejs.org');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body class="docs">        <div id="mobile-bar" >
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.png">
+    <span>Vue.js</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/v2/guide/" class="nav-link current">Guia</a></li>
+<li><a href="/v2/api/" class="nav-link">API</a></li>
+<li><a href="/v2/examples/" class="nav-link">Exemplos</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecossistema</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Ajuda</h4></li>
+    <li><ul>
+      <li><a href="http://forum.vuejs.org/" class="nav-link" target="_blank">Forum</a></li>
+      <li><a href="https://chat.vuejs.org/" class="nav-link" target="_blank" style="display: inline-block; padding-right: 0">Chat</a> (<a href="https://vuejs-brasil.slack.com/" class="nav-link" target="_blank" style="display: inline-block; padding: 0">pt-BR</a>)</li>
+      <li><a href="https://github.com/vuejs-templates" class="nav-link" target="_blank">Templates</a></li>
+    </ul></li>
+    <li><h4>Notícias</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/vuejs" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://medium.com/the-vue-point" class="nav-link" target="_blank">Blog</a></li>
+      <li><a href="https://vuejobs.com/?ref=vuejs" class="nav-link" target="_blank">Empregos</a></li>
+    </ul></li>
+    <li><h4>Plugins Oficiais</h4></li>
+    <li><ul>
+      <li><a href="https://router.vuejs.org/" class="nav-link" target="_blank">Vue Router</a></li>
+      <li><a href="https://vuex.vuejs.org/" class="nav-link" target="_blank">Vuex</a></li>
+    </ul></li>
+    <li><h4>Listas de Recursos</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/vuejs" class="nav-link" target="_blank">Repositórios Oficiais</a></li>
+      <li><a href="https://curated.vuejs.org/" class="nav-link" target="_blank">Lista Curada</a></li>
+      <li><a href="https://github.com/vuejs/awesome-vue" class="nav-link" target="_blank">Awesome Vue</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container language">
+  <a class="nav-link">Traduções</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="https://cn.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Chinês</a></li>
+    <li><a href="https://kr.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Coreano</a></li>
+    <li><a href="https://fr.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Francês</a></li>
+    <li><a href="https://vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Inglês</a></li>
+    <li><a href="https://jp.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Japonês</a></li>
+    <li><a href="https://br.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Português</a></li>
+    <li><a href="https://ru.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Russo</a></li>
+  </ul>
+</li>
+
+<li>
+  <a href="https://vue.threadless.com" target="_blank" class="nav-link shop">Loja</a>
+</li>
+
+  </ul>
+</div>
+
+        
+            <div id="main" class="fix-sidebar">
+                
+                    
+    <div class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="main-menu">
+            <li>
+  <form id="search-form">
+    <input type="text" id="search-query-sidebar" class="search-query st-default-search-input">
+  </form>
+</li>
+<li><a href="/v2/guide/" class="nav-link current">Guia</a></li>
+<li><a href="/v2/api/" class="nav-link">API</a></li>
+<li><a href="/v2/examples/" class="nav-link">Exemplos</a></li>
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">Ecossistema</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><h4>Ajuda</h4></li>
+    <li><ul>
+      <li><a href="http://forum.vuejs.org/" class="nav-link" target="_blank">Forum</a></li>
+      <li><a href="https://chat.vuejs.org/" class="nav-link" target="_blank" style="display: inline-block; padding-right: 0">Chat</a> (<a href="https://vuejs-brasil.slack.com/" class="nav-link" target="_blank" style="display: inline-block; padding: 0">pt-BR</a>)</li>
+      <li><a href="https://github.com/vuejs-templates" class="nav-link" target="_blank">Templates</a></li>
+    </ul></li>
+    <li><h4>Notícias</h4></li>
+    <li><ul>
+      <li><a href="https://twitter.com/vuejs" class="nav-link" target="_blank">Twitter</a></li>
+      <li><a href="https://medium.com/the-vue-point" class="nav-link" target="_blank">Blog</a></li>
+      <li><a href="https://vuejobs.com/?ref=vuejs" class="nav-link" target="_blank">Empregos</a></li>
+    </ul></li>
+    <li><h4>Plugins Oficiais</h4></li>
+    <li><ul>
+      <li><a href="https://router.vuejs.org/" class="nav-link" target="_blank">Vue Router</a></li>
+      <li><a href="https://vuex.vuejs.org/" class="nav-link" target="_blank">Vuex</a></li>
+    </ul></li>
+    <li><h4>Listas de Recursos</h4></li>
+    <li><ul>
+      <li><a href="https://github.com/vuejs" class="nav-link" target="_blank">Repositórios Oficiais</a></li>
+      <li><a href="https://curated.vuejs.org/" class="nav-link" target="_blank">Lista Curada</a></li>
+      <li><a href="https://github.com/vuejs/awesome-vue" class="nav-link" target="_blank">Awesome Vue</a></li>
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container language">
+  <a class="nav-link">Traduções</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="https://cn.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Chinês</a></li>
+    <li><a href="https://kr.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Coreano</a></li>
+    <li><a href="https://fr.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Francês</a></li>
+    <li><a href="https://vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Inglês</a></li>
+    <li><a href="https://jp.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Japonês</a></li>
+    <li><a href="https://br.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Português</a></li>
+    <li><a href="https://ru.vuejs.org/v2/guide/forms.html" class="nav-link" target="_blank">Russo</a></li>
+  </ul>
+</li>
+
+<li>
+  <a href="https://vue.threadless.com" target="_blank" class="nav-link shop">Loja</a>
+</li>
+
+        </ul>
+        <div class="list">
+            <div class="main-sponsor">
+                <span>Patrocínio Platina</span><br>
+                <a href="https://stdlib.com" target="_blank" class="logo">
+                    <img src="/images/stdlib.png">
+                </a>
+            </div>
+            <a class="become-backer" href="/support-vuejs">
+                Seja um Patrocinador
+            </a>
+            <h2>
+                Guia
+                
+                    <select class="version-select">
+                        <option value="SELF" selected>2.x</option>
+                        <option value="v1">1.0</option>
+                        <option value="012">0.12</option>
+                        <option value="011">0.11</option>
+                    </select>
+                
+            </h2>
+            <ul class="menu-root">
+    
+        
+        
+            
+                <li><h3>Essenciais</h3></li>
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/installation.html" class="sidebar-link">Instalação</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/index.html" class="sidebar-link">Introdução</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/instance.html" class="sidebar-link">A Instância Vue</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/syntax.html" class="sidebar-link">Sintaxe de Templates</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/computed.html" class="sidebar-link">Dados Computados e Observadores</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/class-and-style.html" class="sidebar-link">Interligações em Classes e Estilos</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/conditional.html" class="sidebar-link">Renderização Condicional</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/list.html" class="sidebar-link">Renderização de Listas</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/events.html" class="sidebar-link">Manipulação de Eventos</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/forms.html" class="sidebar-link current">Interligações em Formulários</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/components.html" class="sidebar-link">Componentes</a>
+        </li>
+    
+        
+        
+            
+            
+                <li><h3>Avançado</h3></li>
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/reactivity.html" class="sidebar-link">Reatividade em Profundidade</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/transitions.html" class="sidebar-link">Efeitos de Transição</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/transitioning-state.html" class="sidebar-link">Transições nos Dados</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/render-function.html" class="sidebar-link">Funções de Renderização</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/custom-directive.html" class="sidebar-link">Diretivas Personalizadas</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/mixins.html" class="sidebar-link">Mixins</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/plugins.html" class="sidebar-link">Plugins</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/single-file-components.html" class="sidebar-link">Componentes Single-File</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/deployment.html" class="sidebar-link">Publicando em Produção</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/routing.html" class="sidebar-link">Roteamento</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/state-management.html" class="sidebar-link">Gerenciamento de Estado</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/unit-testing.html" class="sidebar-link">Testes Unitários</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/ssr.html" class="sidebar-link">Renderizando no Lado do Servidor</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/typescript.html" class="sidebar-link">Suporte ao TypeScript</a>
+        </li>
+    
+        
+        
+            
+            
+            
+                <li><h3>Migração</h3></li>
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/migration.html" class="sidebar-link">Migração do Vue 1.x</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/migration-vue-router.html" class="sidebar-link">Migração do Vue Router 0.7.x</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/migration-vuex.html" class="sidebar-link">Migração do Vuex 0.6.x para 1.0</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+                <li><h3>Diversos</h3></li>
+            
+        
+        
+        <li>
+            <a href="/v2/guide/comparison.html" class="sidebar-link">Comparação com Outros Frameworks</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/join.html" class="sidebar-link">Junte-se à Comunidade Vue.js!</a>
+        </li>
+    
+        
+        
+            
+            
+            
+            
+        
+        
+        <li>
+            <a href="/v2/guide/team.html" class="sidebar-link">Conheça a Equipe</a>
+        </li>
+    
+    
+</ul>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="content guide with-sidebar forms-guide">
+    
+      
+        <div id="ad">
+  <script>
+    (function () {
+      var s = document.createElement('script')
+      s.setAttribute('async', '')
+      s.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs'
+      s.id = '_carbonads_js'
+      document.getElementById('ad').appendChild(s)
+    })()
+  </script>
+</div>
+
+      
+    
+    
+      <h1>Interligações em Formulários</h1>
+    
+    <h2 id="Uso-Basico"><a href="#Uso-Basico" class="headerlink" title="Uso Básico"></a>Uso Básico</h2><p>Você pode usar a diretiva <code>v-model</code> para criar interligações de mão dupla (<em>two-way binding</em>) entre os dados e elementos como <em>input</em> e <em>textarea</em> de formulários. A diretiva automaticamente busca a maneira correta de atualizar o elemento com base no tipo de entrada. Embora um pouco mágico, <code>v-model</code> é essencialmente açúcar sintático para atualização de dados através de eventos de entrada do usuário, além de cuidados especiais para alguns casos extremos.</p>
+<p class="tip">A diretiva <code>v-model</code> irá ignorar o estado inicial de <code>value</code>, <code>checked</code> ou <code>selected</code> encontrado em qualquer elemento de formulário. Sempre se tratará a instância Vue como a fonte dos dados verdadeiros. Ou seja, declare os valores iniciais no lado JavaScript, dentro da opção <code>data</code> de seu componente.</p>
+
+<p class="tip" id="vmodel-ime-tip">Para linguagens que requerem um <a href="https://en.wikipedia.org/wiki/Input_method" target="_blank" rel="external">IME</a> (Chinês, Japonês, Coreano etc.), você notará que <code>v-model</code> não é atualizado durante a atualização da composição IME. Se você quiser atender a estas atualizações, use o evento <code>input</code> ao invés do <code>v-model</code>.</p>
+
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"message"</span> <span class="attr">placeholder</span>=<span class="string">"Me edite"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>A mensagem é: &#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<div id="example-1" class="demo">
+  <input v-model="message" placeholder="Me edite">
+  <p>A mensagem é: {{ message }}</p>
+</div>
+<script>
+new Vue({
+  el: '#example-1',
+  data: {
+    message: ''
+  }
+})
+</script>
+
+<h3 id="Textarea"><a href="#Textarea" class="headerlink" title="Textarea"></a>Textarea</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Mensagem com múltiplas linhas:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"white-space: pre-line"</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">v-model</span>=<span class="string">"message"</span> <span class="attr">placeholder</span>=<span class="string">"Escreva bastante"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<div id="example-textarea" class="demo">
+  <span>Mensagem com múltiplas linhas:</span>
+  <p style="white-space: pre-line">{{ message }}</p>
+  <br>
+  <textarea v-model="message" placeholder="Escreva bastante"></textarea>
+</div>
+<script>
+new Vue({
+  el: '#example-textarea',
+  data: {
+    message: ''
+  }
+})
+</script>
+
+<p class="tip">Interpolação em <em>textarea</em> (<code>&lt;textarea&gt;{{message}}&lt;/textarea&gt;</code>) não funciona. Em vez disso, sempre use <code>v-model</code>.</p>
+
+<h3 id="Checkbox"><a href="#Checkbox" class="headerlink" title="Checkbox"></a>Checkbox</h3><p><em>Checkbox</em> simples com valor boleano:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"checkbox"</span> <span class="attr">v-model</span>=<span class="string">"checked"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"checkbox"</span>&gt;</span>&#123;&#123; checked &#125;&#125;<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<div id="example-2" class="demo">
+  <input type="checkbox" id="checkbox" v-model="checked">
+  <label for="checkbox">{{ checked }}</label>
+</div>
+<script>
+new Vue({
+  el: '#example-2',
+  data: {
+    checked: false
+  }
+})
+</script>
+
+<p>Múltiplos <em>checkboxes</em>, associados a um mesmo Array:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"jack"</span> <span class="attr">value</span>=<span class="string">"Jack"</span> <span class="attr">v-model</span>=<span class="string">"checkedNames"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"jack"</span>&gt;</span>Jack<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"john"</span> <span class="attr">value</span>=<span class="string">"John"</span> <span class="attr">v-model</span>=<span class="string">"checkedNames"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"john"</span>&gt;</span>John<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"mike"</span> <span class="attr">value</span>=<span class="string">"Mike"</span> <span class="attr">v-model</span>=<span class="string">"checkedNames"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"mike"</span>&gt;</span>Mike<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Nomes assinalados: &#123;&#123; checkedNames &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'...'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">checkedNames</span>: []</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+
+<div id="example-3" class="demo">
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Nomes assinalados: {{ checkedNames }}</span>
+</div>
+<script>
+new Vue({
+  el: '#example-3',
+  data: {
+    checkedNames: []
+  }
+})
+</script>
+
+<h3 id="Radio"><a href="#Radio" class="headerlink" title="Radio"></a>Radio</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"one"</span> <span class="attr">value</span>=<span class="string">"Um"</span> <span class="attr">v-model</span>=<span class="string">"picked"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"one"</span>&gt;</span>Um<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"two"</span> <span class="attr">value</span>=<span class="string">"Dois"</span> <span class="attr">v-model</span>=<span class="string">"picked"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"two"</span>&gt;</span>Dois<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Escolhido: &#123;&#123; picked &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<div id="example-4" class="demo">
+  <input type="radio" id="one" value="Um" v-model="picked">
+  <label for="one">Um</label>
+  <br>
+  <input type="radio" id="two" value="Dois" v-model="picked">
+  <label for="two">Dois</label>
+  <br>
+  <span>Escolhido: {{ picked }}</span>
+</div>
+<script>
+new Vue({
+  el: '#example-4',
+  data: {
+    picked: ''
+  }
+})
+</script>
+
+<h3 id="Select"><a href="#Select" class="headerlink" title="Select"></a>Select</h3><p>Seleção de um único item:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">"selected"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">disabled</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>Escolha um item<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>A<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>B<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>C<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Selecionado: &#123;&#123; selected &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'...'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">selected</span>: <span class="string">''</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+
+<div id="example-5" class="demo">
+  <select v-model="selected">
+    <option disabled value="">Escolha um item</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <br>
+  <span>Selecionado: {{ selected }}</span>
+</div>
+<script>
+new Vue({
+  el: '#example-5',
+  data: {
+    selected: ''
+  }
+})
+</script>
+
+<p class="tip">Se o valor inicial da expressão <code>v-model</code> não corresponder a nenhuma das opções, o <code>&lt;select&gt;</code> será renderizado como “não selecionado”. No iOS, isso impedirá o usuário de selecionar o primeiro item, pois não há disparo de eventos de alteração neste caso. Recomenda-se fornecer uma opção desativada com um valor vazio, como demonstrado no exemplo acima.</p>
+
+<p>Seleção de múltiplos itens (vinculando a um Array):</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">"selected"</span> <span class="attr">multiple</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>A<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>B<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>C<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Selecionados: &#123;&#123; selected &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<div id="example-6" class="demo">
+  <select v-model="selected" multiple style="width: 50px">
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <br>
+  <span>Selecionados: {{ selected }}</span>
+</div>
+<script>
+new Vue({
+  el: '#example-6',
+  data: {
+    selected: []
+  }
+})
+</script>
+
+<p>É possível renderizar dinamicamente as <em>options</em> com <code>v-for</code>:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">"selected"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">v-for</span>=<span class="string">"option in options"</span> <span class="attr">v-bind:value</span>=<span class="string">"option.value"</span>&gt;</span></div><div class="line">    &#123;&#123; option.text &#125;&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Selecionado: &#123;&#123; selected &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'...'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">selected</span>: <span class="string">'A'</span>,</div><div class="line">    <span class="attr">options</span>: [</div><div class="line">      &#123; <span class="attr">text</span>: <span class="string">'Um'</span>, <span class="attr">value</span>: <span class="string">'A'</span> &#125;,</div><div class="line">      &#123; <span class="attr">text</span>: <span class="string">'Dois'</span>, <span class="attr">value</span>: <span class="string">'B'</span> &#125;,</div><div class="line">      &#123; <span class="attr">text</span>: <span class="string">'Três'</span>, <span class="attr">value</span>: <span class="string">'C'</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+
+<div id="example-7" class="demo">
+  <select v-model="selected">
+    <option v-for="option in options" v-bind:value="option.value">
+      {{ option.text }}
+    </option>
+  </select>
+  <br>
+  <span>Selecionado: {{ selected }}</span>
+</div>
+<script>
+new Vue({
+  el: '#example-7',
+  data: {
+    selected: 'A',
+    options: [
+      { text: 'Um', value: 'A' },
+      { text: 'Dois', value: 'B' },
+      { text: 'Três', value: 'C' }
+    ]
+  }
+})
+</script>
+
+<h2 id="Vinculando-aos-Valores"><a href="#Vinculando-aos-Valores" class="headerlink" title="Vinculando aos Valores"></a>Vinculando aos Valores</h2><p>Para <em>radio</em>, <em>checkbox</em> e <em>options</em> de <em>select</em>, os valores de vinculação do <code>v-model</code> são normalmente Strings estáticas (ou boleano no caso do <em>checkbox</em>):</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- `picked` é uma string "a" quando assinalado --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">v-model</span>=<span class="string">"picked"</span> <span class="attr">value</span>=<span class="string">"a"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- `toggle` é verdadeiro ou falso --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">v-model</span>=<span class="string">"toggle"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- `selected` é uma string "abc" quando assinalado --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">"selected"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"abc"</span>&gt;</span>ABC<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Mas, às vezes, podemos querer vincular o valor de uma propriedade dinâmica disponível na instância Vue. Podemos usar <code>v-bind</code> para alcançar este objetivo. Além disso, usar <code>v-bind</code> nos permite vincular o valor de <em>inputs</em> para valores não-String.</p>
+<h3 id="Checkbox-1"><a href="#Checkbox-1" class="headerlink" title="Checkbox"></a>Checkbox</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span></span></div><div class="line">  <span class="attr">type</span>=<span class="string">"checkbox"</span></div><div class="line">  <span class="attr">v-model</span>=<span class="string">"toggle"</span></div><div class="line">  <span class="attr">v-bind:true-value</span>=<span class="string">"a"</span></div><div class="line">  <span class="attr">v-bind:false-value</span>=<span class="string">"b"</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// quando está assinalado:</span></div><div class="line">vm.toggle === vm.a</div><div class="line"><span class="comment">// quando não está assinalado:</span></div><div class="line">vm.toggle === vm.b</div></pre></td></tr></table></figure>
+<h3 id="Radio-1"><a href="#Radio-1" class="headerlink" title="Radio"></a>Radio</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">v-model</span>=<span class="string">"pick"</span> <span class="attr">v-bind:value</span>=<span class="string">"a"</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// quando está assinalado:</span></div><div class="line">vm.pick === vm.a</div></pre></td></tr></table></figure>
+<h3 id="Select-1"><a href="#Select-1" class="headerlink" title="Select"></a>Select</h3><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">"selected"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- Objeto literal atribuído para demonstração --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">v-bind:value</span>=<span class="string">"&#123; number: 123 &#125;"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// quando está assinalado:</span></div><div class="line"><span class="keyword">typeof</span> vm.selected <span class="comment">// -&gt; 'object'</span></div><div class="line">vm.selected.number <span class="comment">// -&gt; 123</span></div></pre></td></tr></table></figure>
+<h2 id="Modificadores"><a href="#Modificadores" class="headerlink" title="Modificadores"></a>Modificadores</h2><h3 id="lazy"><a href="#lazy" class="headerlink" title=".lazy"></a><code>.lazy</code></h3><p>Por padrão, <code>v-model</code> sincroniza o elemento com os dados após cada evento do tipo <code>input</code> (com exceção para o caso de composição IME <a href="#vmodel-ime-tip">descrito anteriormente</a>). Adicionando o modificador <code>lazy</code>, a sincronização ocorrerá somente após o evento <code>change</code>:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- sincronizado depois do "change" ao invés de "input" --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.lazy</span>=<span class="string">"msg"</span> &gt;</span></div></pre></td></tr></table></figure>
+<h3 id="number"><a href="#number" class="headerlink" title=".number"></a><code>.number</code></h3><p>Se você quiser que a entrada do usuário seja automaticamente convertida para um número, pode ser feito adicionando o modificador <code>number</code> ao <code>v-model</code> do elemento:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.number</span>=<span class="string">"age"</span> <span class="attr">type</span>=<span class="string">"number"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Isso é bastante útil, porque mesmo no caso de <code>type=&quot;number&quot;</code>, o valor retornado pelo HTML é sempre uma String.</p>
+<h3 id="trim"><a href="#trim" class="headerlink" title=".trim"></a><code>.trim</code></h3><p>Se você quiser que a entrada do usuário seja automaticamente isenta de espaços no início e no fim do texto, você pode adicionar o modificador <code>trim</code> ao <code>v-model</code> do elemento:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model.trim</span>=<span class="string">"msg"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="v-model-com-Componentes"><a href="#v-model-com-Componentes" class="headerlink" title="v-model com Componentes"></a><code>v-model</code> com Componentes</h2><blockquote>
+<p>Se você não está familiarizado com componentes Vue, apenas pule isto por enquanto.</p>
+</blockquote>
+<p>Os tipo de <em>input</em> nativos do HTML nem sempre atendem todas as necessidades. Por sorte, componentes Vue permitem construir <em>inputs</em> reutilizáveis com comportamento completamente personalizado. Estes componentes também funcionam com <code>v-model</code>! Para saber mais, leia sobre <a href="components.html#Componentes-de-Formularios-usando-Eventos-Personalizados">componentes de formulário personalizados</a> no guia de Componentes.</p>
+
+    
+      <div class="guide-links">
+        
+          <span>← <a href="/v2/guide/events.html">Manipulação de Eventos</a></span>
+        
+        
+          <span style="float:right"><a href="/v2/guide/components.html">Componentes</a> →</span>
+        
+      </div>
+    
+    <div class="footer">
+      Encontrou um problema ou quer contribuir com a documentação?
+      <a href="https://github.com/vuejs-br/br.vuejs.org/blob/master/src/v2/guide/forms.md" target="_blank">
+        Edite esta página no Github!
+      </a>
+    </div>
+</div>
+
+                
+            </div>
+            <script src="/js/smooth-scroll.min.js"></script>
+        
+
+        <!-- main custom script for sidebars, version selects etc. -->
+        <script src="/js/css.escape.js"></script>
+        <script src="/js/common.js"></script>
+
+        <!-- search -->
+        <link href="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/search.css">
+        <script src="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+        <script>
+        [
+          '#search-query-nav',
+          '#search-query-sidebar',
+          '#search-query-menu'
+        ].forEach(function (selector) {
+          if (!document.querySelector(selector)) return
+          // search index defaults to v2
+          var match = window.location.pathname.match(/^\/(v\d+)/)
+          var version = match ? match[1] : 'v2'
+          docsearch({
+            appId: 'BH4D9OD16A',
+            apiKey: '85cc3221c9f23bfbaa4e3913dd7625ea',
+            indexName: 'vuejs',
+            inputSelector: selector,
+            algoliaOptions: { facetFilters: ["version:" + version] }
+          })
+        })
+        </script>
+
+        <!-- fastclick -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body)
+        }, false)
+        </script>
+    </body>
+</html>
