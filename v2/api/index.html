@@ -1126,24 +1126,21 @@
 <li><p><strong>Returns:</strong> <code>{Function} unwatch</code></p>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>Watch an expression or a computed function on the Vue instance for changes. The callback gets called with the new value and the old value. The expression only accepts simple dot-delimited paths. For more complex expression, use a function instead.</p>
+<p>Observa (em busca de mudanças) uma expressão ou uma função computada na instância do Vue. A função de <em>callback</em> é chamada com o novo e o antigo valor. A expressão somente aceita caminhos delimitados por pontos. Para expressões mais complexas, utilize uma função.</p>
+<p class="tip">Nota: quando se está alterando (ao invés de substituindo) um objeto ou um <em>Array</em>, o valor antigo será igual ao novo valor, pois eles referenciam o mesmo objeto/<em>Array</em>. O Vue não mantém uma cópia dos valores antes de serem mutados.</p>
 </li>
-</ul>
-<p class="tip">Note: when mutating (rather than replacing) an Object or an Array, the old value will be the same as new value because they reference the same Object/Array. Vue doesn’t keep a copy of the pre-mutate value.</p>
-
-<ul>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// keypath</span></div><div class="line">vm.$watch(<span class="string">'a.b.c'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</div><div class="line">  <span class="comment">// do something</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// function</span></div><div class="line">vm.$watch(</div><div class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="keyword">this</span>.b</div><div class="line">  &#125;,</div><div class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</div><div class="line">    <span class="comment">// do something</span></div><div class="line">  &#125;</div><div class="line">)</div></pre></td></tr></table></figure>
-<p><code>vm.$watch</code> returns an unwatch function that stops firing the callback:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unwatch = vm.$watch(<span class="string">'a'</span>, cb)</div><div class="line"><span class="comment">// later, teardown the watcher</span></div><div class="line">unwatch()</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// caminho da chave</span></div><div class="line">vm.$watch(<span class="string">'a.b.c'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</div><div class="line">  <span class="comment">// faz alguma coisa</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// função</span></div><div class="line">vm.$watch(</div><div class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="keyword">this</span>.b</div><div class="line">  &#125;,</div><div class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</div><div class="line">    <span class="comment">// faz alguma coisa</span></div><div class="line">  &#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p><code>vm.$watch</code> retorna uma função <em>unwatch</em>, que para de lançar o <em>callback</em>:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unwatch = vm.$watch(<span class="string">'a'</span>, cb)</div><div class="line"><span class="comment">// depois, destruirá o watcher</span></div><div class="line">unwatch()</div></pre></td></tr></table></figure>
 </li>
-<li><p><strong>Option: deep</strong></p>
-<p>To also detect nested value changes inside Objects, you need to pass in <code>deep: true</code> in the options argument. Note that you don’t need to do so to listen for Array mutations.</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$watch(<span class="string">'someObject'</span>, callback, &#123;</div><div class="line">  <span class="attr">deep</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line">vm.someObject.nestedValue = <span class="number">123</span></div><div class="line"><span class="comment">// callback is fired</span></div></pre></td></tr></table></figure>
+<li><p><strong>Opção: deep</strong></p>
+<p>Para também detectar valores aninhados dentro de objetos, você deve passar <code>deep: true</code> nas opções. Note que você não precisa fazer isso para mutações em <em>Array</em>.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$watch(<span class="string">'someObject'</span>, callback, &#123;</div><div class="line">  <span class="attr">deep</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line">vm.someObject.nestedValue = <span class="number">123</span></div><div class="line"><span class="comment">// callback é acionado</span></div></pre></td></tr></table></figure>
 </li>
-<li><p><strong>Option: immediate</strong></p>
-<p>Passing in <code>immediate: true</code> in the option will trigger the callback immediately with the current value of the expression:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$watch(<span class="string">'a'</span>, callback, &#123;</div><div class="line">  <span class="attr">immediate</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line"><span class="comment">// `callback` is fired immediately with current value of `a`</span></div></pre></td></tr></table></figure>
+<li><p><strong>Opção: immediate</strong></p>
+<p>Passar <code>immediate: true</code> nas opções irá acionar a função de <em>callback</em> imediatamente com o novo valor da expressão:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$watch(<span class="string">'a'</span>, callback, &#123;</div><div class="line">  <span class="attr">immediate</span>: <span class="literal">true</span></div><div class="line">&#125;)</div><div class="line"><span class="comment">// `callback` é acionada imediatamente com o novo valor de 'a'</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="vm-set">vm.$set( target, key, value )</h3>
@@ -1156,10 +1153,10 @@
 <li><code>{any} value</code></li>
 </ul>
 </li>
-<li><p><strong>Returns:</strong> the set value.</p>
+<li><p><strong>Retorno:</strong> o valor determinado.</p>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>This is the <strong>alias</strong> of the global <code>Vue.set</code>.</p>
+<p>Esta método é um <strong><em>alias</em></strong> para a função global <code>Vue.set</code>.</p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="#Vue-set">Vue.set</a></p>
 </li>
@@ -1174,7 +1171,7 @@
 </ul>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>This is the <strong>alias</strong> of the global <code>Vue.delete</code>.</p>
+<p>Este método é um <strong><em>alias</em></strong> para a função global <code>Vue.delete</code>.</p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="#Vue-delete">Vue.delete</a></p>
 </li>
@@ -1184,12 +1181,12 @@
 <ul>
 <li><p><strong>Argumentos:</strong></p>
 <ul>
-<li><code>{string | Array&lt;string&gt;} event</code> (array only supported in 2.2.0+)</li>
+<li><code>{string | Array&lt;string&gt;} event</code> (array somente é suportado em 2.2.0+)</li>
 <li><code>{Function} callback</code></li>
 </ul>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>Listen for a custom event on the current vm. Events can be triggered by <code>vm.$emit</code>. The callback will receive all the additional arguments passed into these event-triggering methods.</p>
+<p>Escuta um evento customizado na <em>vm</em> atual. Eventos podem ser lançados utilizando <code>vm.$emit</code>. A função de <em>callback</em> irá receber todos os argumentos adicionais passados nos métodos que lançam eventos.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(msg)</div><div class="line">&#125;)</div><div class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'hi'</span>)</div><div class="line"><span class="comment">// -&gt; "hi"</span></div></pre></td></tr></table></figure>
@@ -1205,7 +1202,7 @@
 </ul>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>Listen for a custom event, but only once. The listener will be removed once it triggers for the first time.</p>
+<p>Escuta um evento customizado, porém somente uma vez. O <em>listener</em> será removido assim que for acionado pela primeira vez.</p>
 </li>
 </ul>
 <h3 id="vm-off">vm.$off( [event, callback] )</h3>
@@ -1213,18 +1210,18 @@
 <ul>
 <li><p><strong>Argumentos:</strong></p>
 <ul>
-<li><code>{string | Array&lt;string&gt;} event</code> (array only supported in 2.2.2+)</li>
+<li><code>{string | Array&lt;string&gt;} event</code> (array somente é suportado em 2.2.2+)</li>
 <li><code>{Function} [callback]</code></li>
 </ul>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>Remove custom event listener(s).</p>
+<p>Remove <em>listener(s)</em> de eventos customizados.</p>
 <ul>
-<li><p>If no arguments are provided, remove all event listeners;</p>
+<li><p>Se nenhum argumento é passado, esta função irá remover todos os <em>listeners</em>;</p>
 </li>
-<li><p>If only the event is provided, remove all listeners for that event;</p>
+<li><p>Se apenas o evento é passado, esta função irá remover todos os <em>listeners</em> para este evento;</p>
 </li>
-<li><p>If both event and callback are given, remove the listener for that specific callback only.</p>
+<li><p>Se tanto o evento quanto o <em>callback</em> forem passados, esta função somente irá remover o <em>listener</em> para este <em>callback</em> específico.</p>
 </li>
 </ul>
 </li>
@@ -1237,7 +1234,7 @@
 <li><code>{string} event</code></li>
 <li><code>[...args]</code></li>
 </ul>
-<p>Trigger an event on the current instance. Any additional arguments will be passed into the listener’s callback function.</p>
+<p>Lança um evento na instância atual. Qualquer argumento adicional será passado para a função de <em>callback</em> do <em>listener</em>.</p>
 </li>
 </ul>
 <h2 id="Metodos-da-Instancia-Ciclo-de-Vida"><a href="#Metodos-da-Instancia-Ciclo-de-Vida" class="headerlink" title="Métodos da Instância / Ciclo-de-Vida"></a>Métodos da Instância / Ciclo-de-Vida</h2><h3 id="vm-mount">vm.$mount( [elementOrSelector] )</h3>
@@ -1249,20 +1246,20 @@
 <li><code>{boolean} [hydrating]</code></li>
 </ul>
 </li>
-<li><p><strong>Returns:</strong> <code>vm</code> - the instance itself</p>
+<li><p><strong>Returns:</strong> <code>vm</code> - a própria instância</p>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>If a Vue instance didn’t receive the <code>el</code> option at instantiation, it will be in “unmounted” state, without an associated DOM element. <code>vm.$mount()</code> can be used to manually start the mounting of an unmounted Vue instance.</p>
-<p>If <code>elementOrSelector</code> argument is not provided, the template will be rendered as an off-document element, and you will have to use native DOM API to insert it into the document yourself.</p>
-<p>The method returns the instance itself so you can chain other instance methods after it.</p>
+<p>Se a instância do Vue não recebeu a opção <code>el</code> durante a instanciação, ela estará em um estado “não montado”, sem um elemento DOM associado. <code>vm.$mount()</code> pode ser usada para começar a montagem de uma instância não montada do Vue.</p>
+<p>Se o argumento <code>elementOrSelector</code> não for passado, o <em>template</em> será renderizado como um elemento “fora do documento”, e você terá que usar a API nativa do DOM para inserí-lo no documento.</p>
+<p>O método retorna a própria instância, para que você possa encadear outros métodos de instâncias depois dele.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> MyComponent = Vue.extend(&#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'&lt;div&gt;Hello!&lt;/div&gt;'</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// create and mount to #app (will replace #app)</span></div><div class="line"><span class="keyword">new</span> MyComponent().$mount(<span class="string">'#app'</span>)</div><div class="line"></div><div class="line"><span class="comment">// the above is the same as:</span></div><div class="line"><span class="keyword">new</span> MyComponent(&#123; <span class="attr">el</span>: <span class="string">'#app'</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// or, render off-document and append afterwards:</span></div><div class="line"><span class="keyword">var</span> component = <span class="keyword">new</span> MyComponent().$mount()</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).appendChild(component.$el)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> MyComponent = Vue.extend(&#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'&lt;div&gt;Hello!&lt;/div&gt;'</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// cria e monta em #app (irá substituir #app)</span></div><div class="line"><span class="keyword">new</span> MyComponent().$mount(<span class="string">'#app'</span>)</div><div class="line"></div><div class="line"><span class="comment">// a linha acima é o mesmo que:</span></div><div class="line"><span class="keyword">new</span> MyComponent(&#123; <span class="attr">el</span>: <span class="string">'#app'</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// ou renderiza como "fora do documento" e anexa depois:</span></div><div class="line"><span class="keyword">var</span> component = <span class="keyword">new</span> MyComponent().$mount()</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).appendChild(component.$el)</div></pre></td></tr></table></figure>
 </li>
 <li><p><strong>Ver também:</strong></p>
 <ul>
-<li><a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Lifecycle Diagram</a></li>
-<li><a href="../guide/ssr.html">Server-Side Rendering</a></li>
+<li><a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do ciclo de vida</a></li>
+<li><a href="../guide/ssr.html">Renderização no lado do servidor</a></li>
 </ul>
 </li>
 </ul>
@@ -1270,7 +1267,7 @@
 
 <ul>
 <li><p><strong>Uso:</strong></p>
-<p>Force the Vue instance to re-render. Note it does not affect all child components, only the instance itself and child components with inserted slot content.</p>
+<p>Força a instância do Vue a renderizar novamente. Note que isso não afeta todos os componentes filhos, apenas a própria instância e os componentes filhos com conteúdo em inseridos em seus respectivos <em>slots</em>.</p>
 </li>
 </ul>
 <h3 id="vm-nextTick">vm.$nextTick( [callback] )</h3>
@@ -1282,18 +1279,18 @@
 </ul>
 </li>
 <li><p><strong>Uso:</strong></p>
-<p>Defer the callback to be executed after the next DOM update cycle. Use it immediately after you’ve changed some data to wait for the DOM update. This is the same as the global <code>Vue.nextTick</code>, except that the callback’s <code>this</code> context is automatically bound to the instance calling this method.</p>
+<p>Adia a execução do <em>callback</em> para o próximo ciclo de atualização. Use esta função imediatamente após você alterar algum dado para esperar pela atualização do DOM. Este método é o mesmo que a função global <code>Vue.nextTick</code>, exceto que o contexto do <code>this</code> no <em>callback</em> é automaticamente vinculado (<em>bound</em>) à instância que chama este método.</p>
 <blockquote>
-<p>Novo em 2.1.0+: returns a Promise if no callback is provided and Promise is supported in the execution environment.</p>
+<p>Novo em 2.1.0+: retorna uma Promise se nenhum <em>callback</em> é provido, e Promise é suportada no ambiente de execução.</p>
 </blockquote>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">  methods: &#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    example: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="comment">// modify data</span></div><div class="line">      <span class="keyword">this</span>.message = <span class="string">'changed'</span></div><div class="line">      <span class="comment">// DOM is not updated yet</span></div><div class="line">      <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// DOM is now updated</span></div><div class="line">        <span class="comment">// `this` is bound to the current instance</span></div><div class="line">        <span class="keyword">this</span>.doSomethingElse()</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">  methods: &#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    example: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="comment">// modifica um dado</span></div><div class="line">      <span class="keyword">this</span>.message = <span class="string">'changed'</span></div><div class="line">      <span class="comment">// DOM ainda não está atualizada</span></div><div class="line">      <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// DOM agora está atualizada</span></div><div class="line">        <span class="comment">// `this` é vinculado (bound) à instância atual</span></div><div class="line">        <span class="keyword">this</span>.doSomethingElse()</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 <li><p><strong>Ver também:</strong></p>
 <ul>
 <li><a href="#Vue-nextTick">Vue.nextTick</a></li>
-<li><a href="../guide/reactivity.html#Async-Update-Queue">Async Update Queue</a></li>
+<li><a href="../guide/reactivity.html#Async-Update-Queue">Fila de atualização <em>Async</em></a></li>
 </ul>
 </li>
 </ul>
@@ -1301,11 +1298,11 @@
 
 <ul>
 <li><p><strong>Uso:</strong></p>
-<p>Completely destroy a vm. Clean up its connections with other existing vms, unbind all its directives, turn off all event listeners.</p>
-<p>Triggers the <code>beforeDestroy</code> and <code>destroyed</code> hooks.</p>
-<p class="tip">In normal use cases you shouldn’t have to call this method yourself. Prefer controlling the lifecycle of child components in a data-driven fashion using <code>v-if</code> and <code>v-for</code>.</p>
+<p>Destrói completamente a <em>vm</em>. Limpa todas as suas conexões com outras <em>vms</em>, desvincula (<em>unbind</em>) todas as suas diretivas e desliga todos os <em>listeners</em> de eventos.</p>
+<p>Aciona os <em>hooks</em> <code>beforeDestroy</code> e <code>destroyed</code>.</p>
+<p class="tip">Em casos normais você não deve chamar este método. Prefira controlar o ciclo de vida dos componentes filhos em um modelo direcionado a dados utilizando <code>v-if</code> e <code>v-for</code>.</p>
 </li>
-<li><p><strong>Ver também:</strong> <a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Lifecycle Diagram</a></p>
+<li><p><strong>Ver também:</strong> <a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do ciclo de vida</a></p>
 </li>
 </ul>
 <h2 id="Diretivas"><a href="#Diretivas" class="headerlink" title="Diretivas"></a>Diretivas</h2><h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><ul>
