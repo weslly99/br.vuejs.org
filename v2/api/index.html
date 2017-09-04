@@ -93,7 +93,7 @@
   <ul class="nav-dropdown">
     <li><h4>Ajuda</h4></li>
     <li><ul>
-      <li><a href="http://forum.vuejs.org/" class="nav-link" target="_blank">Forum</a></li>
+      <li><a href="https://forum.vuejs.org/" class="nav-link" target="_blank">Forum</a></li>
       <li><a href="https://chat.vuejs.org/" class="nav-link" target="_blank" style="display: inline-block; padding-right: 0">Chat</a> (<a href="https://vuejs-brasil.slack.com/" class="nav-link" target="_blank" style="display: inline-block; padding: 0">pt-BR</a>)</li>
       <li><a href="https://github.com/vuejs-templates" class="nav-link" target="_blank">Templates</a></li>
     </ul></li>
@@ -157,7 +157,7 @@
   <ul class="nav-dropdown">
     <li><h4>Ajuda</h4></li>
     <li><ul>
-      <li><a href="http://forum.vuejs.org/" class="nav-link" target="_blank">Forum</a></li>
+      <li><a href="https://forum.vuejs.org/" class="nav-link" target="_blank">Forum</a></li>
       <li><a href="https://chat.vuejs.org/" class="nav-link" target="_blank" style="display: inline-block; padding-right: 0">Chat</a> (<a href="https://vuejs-brasil.slack.com/" class="nav-link" target="_blank" style="display: inline-block; padding: 0">pt-BR</a>)</li>
       <li><a href="https://github.com/vuejs-templates" class="nav-link" target="_blank">Templates</a></li>
     </ul></li>
@@ -544,7 +544,7 @@
 <p>If required, a deep clone of the original object can be obtained by passing <code>vm.$data</code> through <code>JSON.parse(JSON.stringify(...))</code>.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</div><div class="line"></div><div class="line"><span class="comment">// direct instance creation</span></div><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: data</div><div class="line">&#125;)</div><div class="line">vm.a <span class="comment">// -&gt; 1</span></div><div class="line">vm.$data === data <span class="comment">// -&gt; true</span></div><div class="line"></div><div class="line"><span class="comment">// must use function when in Vue.extend()</span></div><div class="line"><span class="keyword">var</span> Component = Vue.extend(&#123;</div><div class="line">  <span class="attr">data</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</div><div class="line"></div><div class="line"><span class="comment">// direct instance creation</span></div><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: data</div><div class="line">&#125;)</div><div class="line">vm.a <span class="comment">// =&gt; 1</span></div><div class="line">vm.$data === data <span class="comment">// =&gt; true</span></div><div class="line"></div><div class="line"><span class="comment">// must use function when in Vue.extend()</span></div><div class="line"><span class="keyword">var</span> Component = Vue.extend(&#123;</div><div class="line">  <span class="attr">data</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p class="tip">Note that <strong>you should not use an arrow function with the <code>data</code> property</strong> (e.g. <code>data: () =&gt; { return { a: this.myProp }}</code>). The reason is arrow functions bind the parent context, so <code>this</code> will not be the Vue instance as you expect and <code>this.myProp</code> will be undefined.</p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="../guide/reactivity.html">Reactivity in Depth</a></p>
@@ -584,7 +584,7 @@
 <p>Computed properties are cached, and only re-computed on reactive dependency changes. Note that if a certain dependency is out of the instance’s scope (i.e. not reactive), the computed property will <strong>not</strong> be updated.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</div><div class="line">  <span class="attr">computed</span>: &#123;</div><div class="line">    <span class="comment">// get only, just need a function</span></div><div class="line">    aDouble: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="number">2</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// both get and set</span></div><div class="line">    aPlus: &#123;</div><div class="line">      <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.a = v - <span class="number">1</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.aPlus   <span class="comment">// -&gt; 2</span></div><div class="line">vm.aPlus = <span class="number">3</span></div><div class="line">vm.a       <span class="comment">// -&gt; 2</span></div><div class="line">vm.aDouble <span class="comment">// -&gt; 4</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</div><div class="line">  <span class="attr">computed</span>: &#123;</div><div class="line">    <span class="comment">// get only, just need a function</span></div><div class="line">    aDouble: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="number">2</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// both get and set</span></div><div class="line">    aPlus: &#123;</div><div class="line">      <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.a = v - <span class="number">1</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.aPlus   <span class="comment">// =&gt; 2</span></div><div class="line">vm.aPlus = <span class="number">3</span></div><div class="line">vm.a       <span class="comment">// =&gt; 2</span></div><div class="line">vm.aDouble <span class="comment">// =&gt; 4</span></div></pre></td></tr></table></figure>
 </li>
 <li><p><strong>Ver também:</strong> <a href="../guide/computed.html">Computed Properties</a></p>
 </li>
@@ -609,7 +609,7 @@
 <p>An object where keys are expressions to watch and values are the corresponding callbacks. The value can also be a string of a method name, or an Object that contains additional options. The Vue instance will call <code>$watch()</code> for each entry in the object at instantiation.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">b</span>: <span class="number">2</span>,</div><div class="line">    <span class="attr">c</span>: <span class="number">3</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    <span class="attr">a</span>: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'new: %s, old: %s'</span>, val, oldVal)</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// string method name</span></div><div class="line">    b: <span class="string">'someMethod'</span>,</div><div class="line">    <span class="comment">// deep watcher</span></div><div class="line">    c: &#123;</div><div class="line">      <span class="attr">handler</span>: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;,</div><div class="line">      <span class="attr">deep</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.a = <span class="number">2</span> <span class="comment">// -&gt; new: 2, old: 1</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">b</span>: <span class="number">2</span>,</div><div class="line">    <span class="attr">c</span>: <span class="number">3</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    <span class="attr">a</span>: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'new: %s, old: %s'</span>, val, oldVal)</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// string method name</span></div><div class="line">    b: <span class="string">'someMethod'</span>,</div><div class="line">    <span class="comment">// deep watcher</span></div><div class="line">    c: &#123;</div><div class="line">      <span class="attr">handler</span>: <span class="function"><span class="keyword">function</span> (<span class="params">val, oldVal</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;,</div><div class="line">      <span class="attr">deep</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">vm.a = <span class="number">2</span> <span class="comment">// =&gt; new: 2, old: 1</span></div></pre></td></tr></table></figure>
 <p class="tip">Note that <strong>you should not use an arrow function to define a watcher</strong> (e.g. <code>searchQuery: newValue =&gt; this.updateAutocomplete(newValue)</code>). The reason is arrow functions bind the parent context, so <code>this</code> will not be the Vue instance as you expect and <code>this.updateAutocomplete</code> will be undefined.</p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="#vm-watch">Métodos da Instância / Data - vm.$watch</a></p>
@@ -713,7 +713,9 @@
 <li><p><strong>Tipo:</strong> <code>Function</code></p>
 </li>
 <li><p><strong>Detalhes:</strong></p>
-<p>Invocado logo após a instância ter sido montada onde <code>el</code> é substituído pelo recente criado <code>vm.$el</code>. Se a instância raiz é montada em um elemento in-document, <code>vm.$el</code> também será in-document quando <code>mounted</code> é invocada.</p>
+<p>Invocado logo após a instância ter sido montada, onde <code>el</code> é substituído pelo recém criado <code>vm.$el</code>. Se a instância raiz é montada em um elemento já presente no documento, <code>vm.$el</code> também estará presente no documento quando <code>mounted</code> for invocada.</p>
+<p>Observe que o <code>mounted</code> <strong>não</strong> garante que todos os componentes filhos também já tenham sido montados. Se você quiser esperar até que toda a camada <em>view</em> do componente em questão tiver sido renderizada, você pode utilizar <a href="#vm-nextTick">vm.$nextTick</a> dentro do <code>mounted</code>:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">mounted: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// Código que irá rodar apenas após toda</span></div><div class="line">    <span class="comment">// a árvore do componente ter sido renderizada</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>Este gatilho não é invocado em Renderização no Lado do Servidor.</strong></p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do Ciclo de Vida</a></p>
@@ -736,6 +738,8 @@
 <li><p><strong>Detalhes:</strong></p>
 <p>Invocado após a mudança de dados fazer o virtual DOM ser re-renderizado e atualizado.</p>
 <p>O DOM do componente estará no estado <code>updated</code> quando este gatilho for invocado, assim você pode realizar operações dependentes de DOM neste gatilho.<br>Entretanto, na maioria dos casos você deveria evitar mudar o estado deste gatilho, melhor utilizar <a href="#computed">propriedades computadas</a> ou <a href="#watch">observadores</a>.</p>
+<p>Observe que o <code>updated</code> <strong>não</strong> garante que todos os componentes filhos também já tenham sido montados. Se você quiser esperar até que toda a camada <em>view</em> do componente em questão tiver sido renderizada, você pode utilizar <a href="#vm-nextTick">vm.$nextTick</a> dentro do <code>updated</code>:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">updated: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// Código que irá rodar apenas após toda</span></div><div class="line">    <span class="comment">// a árvore do componente ter sido re-renderizada</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>Este gatilho não é invocado em Renderização no Lado do Servidor.</strong></p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do Ciclo de Vida</a></p>
@@ -834,7 +838,7 @@
 <p>Mixin hooks are called in the order they are provided, and called before the component’s own hooks.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> mixin = &#123;</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">1</span>) &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">2</span>) &#125;,</div><div class="line">  <span class="attr">mixins</span>: [mixin]</div><div class="line">&#125;)</div><div class="line"><span class="comment">// -&gt; 1</span></div><div class="line"><span class="comment">// -&gt; 2</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> mixin = &#123;</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">1</span>) &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">2</span>) &#125;,</div><div class="line">  <span class="attr">mixins</span>: [mixin]</div><div class="line">&#125;)</div><div class="line"><span class="comment">// =&gt; 1</span></div><div class="line"><span class="comment">// =&gt; 2</span></div></pre></td></tr></table></figure>
 </li>
 <li><p><strong>Ver também:</strong> <a href="../guide/mixins.html">Mixins</a></p>
 </li>
@@ -871,7 +875,7 @@
 </blockquote>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> Provider = &#123;</div><div class="line">  <span class="attr">provide</span>: &#123;</div><div class="line">    <span class="attr">foo</span>: <span class="string">'bar'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: [<span class="string">'foo'</span>],</div><div class="line">  created () &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.foo) <span class="comment">// -&gt; "bar"</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> Provider = &#123;</div><div class="line">  <span class="attr">provide</span>: &#123;</div><div class="line">    <span class="attr">foo</span>: <span class="string">'bar'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: [<span class="string">'foo'</span>],</div><div class="line">  created () &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.foo) <span class="comment">// =&gt; "bar"</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>With ES2015 Symbols, function <code>provide</code> and object <code>inject</code>:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> s = <span class="built_in">Symbol</span>()</div><div class="line"></div><div class="line"><span class="keyword">const</span> Provider = &#123;</div><div class="line">  provide () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      [s]: <span class="string">'foo'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Child = &#123;</div><div class="line">  <span class="attr">inject</span>: &#123; s &#125;,</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
@@ -963,7 +967,7 @@
 <li><p><strong>Tipo:</strong> <code>Object</code></p>
 </li>
 <li><p><strong>Detalhes:</strong></p>
-<p>O objeto <em>data</em> que a instância Vue está observando. A instância do Vue provê acesso a estas propriedades no seu objeto <em>data</em>.</p>
+<p>O objeto <em>data</em> que a instância do Vue está observando. A instância do Vue provê acesso a estas propriedades no seu objeto <em>data</em>.</p>
 </li>
 <li><p><strong>Ver também:</strong> <a href="#data">Opções / Dados - data</a></p>
 </li>
@@ -993,8 +997,8 @@
 <li><p><strong>Somente leitura</strong></p>
 </li>
 <li><p><strong>Detalhes:</strong></p>
-<p>As opções de instânciação usadas para a instância atual do Vue. Isto é útil quando se deseja incluir propriedades personalizadas nas opções:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">customOption</span>: <span class="string">'foo'</span>,</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// -&gt; 'foo'</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>As opções de instanciação usadas para a instância atual do Vue. Isto é útil quando se deseja incluir propriedades personalizadas nas opções:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">customOption</span>: <span class="string">'foo'</span>,</div><div class="line">  <span class="attr">created</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// =&gt; 'foo'</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="vm-parent"><a href="#vm-parent" class="headerlink" title="vm.$parent"></a>vm.$parent</h3><ul>
@@ -1012,7 +1016,7 @@
 <li><p><strong>Somente leitura</strong></p>
 </li>
 <li><p><strong>Detalhes:</strong></p>
-<p>A instância raíz do Vue da árvore do componente atual. Se a instância atual não tem uma instância pai, este valor vai ser ele mesmo.</p>
+<p>A instância do Vue raíz da árvore do componente atual. Se a instância atual não tem uma instância pai, este valor vai ser ele mesmo.</p>
 </li>
 </ul>
 <h3 id="vm-children"><a href="#vm-children" class="headerlink" title="vm.$children"></a>vm.$children</h3><ul>
@@ -1021,7 +1025,7 @@
 <li><p><strong>Somente leitura</strong></p>
 </li>
 <li><p><strong>Detalhes:</strong></p>
-<p>Os componentes filhos diretos da instância atual. <strong>Note que não há ordem garantida para <code>$children</code>, e esta propriedade não é reativa.</strong> Se você está tentando usar <code>$chilren</code>para <em>binding</em> de dados, considere usar um Array e <code>v-for</code> para gerar os componentes filhos, e use o Array como a fonte da verdade.</p>
+<p>Os componentes filhos diretos da instância atual. <strong>Note que não há ordem garantida para <code>$children</code>, e esta propriedade não é reativa.</strong> Se você está tentando usar <code>$children</code>para <em>binding</em> de dados, considere usar um Array e <code>v-for</code> para gerar os componentes filhos, e use o Array como a fonte da verdade.</p>
 </li>
 </ul>
 <h3 id="vm-slots"><a href="#vm-slots" class="headerlink" title="vm.$slots"></a>vm.$slots</h3><ul>
@@ -1189,7 +1193,7 @@
 <p>Escuta um evento customizado na <em>vm</em> atual. Eventos podem ser lançados utilizando <code>vm.$emit</code>. A função de <em>callback</em> irá receber todos os argumentos adicionais passados nos métodos que lançam eventos.</p>
 </li>
 <li><p><strong>Exemplo:</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(msg)</div><div class="line">&#125;)</div><div class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'hi'</span>)</div><div class="line"><span class="comment">// -&gt; "hi"</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(msg)</div><div class="line">&#125;)</div><div class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'hi'</span>)</div><div class="line"><span class="comment">// =&gt; "hi"</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="vm-once">vm.$once( event, callback )</h3>
@@ -1258,8 +1262,8 @@
 </li>
 <li><p><strong>Ver também:</strong></p>
 <ul>
-<li><a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do ciclo de vida</a></li>
-<li><a href="../guide/ssr.html">Renderização no lado do servidor</a></li>
+<li><a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do Ciclo de Vida</a></li>
+<li><a href="../guide/ssr.html">Renderização no Lado do Servidor</a></li>
 </ul>
 </li>
 </ul>
@@ -1302,7 +1306,7 @@
 <p>Aciona os <em>hooks</em> <code>beforeDestroy</code> e <code>destroyed</code>.</p>
 <p class="tip">Em casos normais você não deve chamar este método. Prefira controlar o ciclo de vida dos componentes filhos em um modelo direcionado a dados utilizando <code>v-if</code> e <code>v-for</code>.</p>
 </li>
-<li><p><strong>Ver também:</strong> <a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do ciclo de vida</a></p>
+<li><p><strong>Ver também:</strong> <a href="../guide/instance.html#Diagrama-do-Ciclo-de-Vida">Diagrama do Ciclo de Vida</a></p>
 </li>
 </ul>
 <h2 id="Diretivas"><a href="#Diretivas" class="headerlink" title="Diretivas"></a>Diretivas</h2><h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><ul>
