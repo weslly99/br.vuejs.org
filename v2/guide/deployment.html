@@ -798,9 +798,9 @@
 <h2 id="Extraindo-CSS-de-Componentes"><a href="#Extraindo-CSS-de-Componentes" class="headerlink" title="Extraindo CSS de Componentes"></a>Extraindo CSS de Componentes</h2><p>Quando estiver usando Componentes Single-File, o CSS dentro deles é dinamicamente injetado na forma de <em> tags</em> <code>&lt;style&gt;</code> pelo JavaScript. Isto tem um pequeno custo durante a execução, e se você estiver utilizando <em>server-side rendering</em>, ocorrerá um efeito de “<em>flash</em> de conteúdo não estilizado”. Extrair o CSS de todos os componentes no mesmo arquivo pode evitar estes problemas, além de resultar em uma melhor minificação do CSS e melhor cache.</p>
 <p>Acesse a documentação da respectiva ferramenta de <em>build</em> para ver como é feito:</p>
 <ul>
-<li><a href="http://vue-loader.vuejs.org/en/configurations/extract-css.html" target="_blank" rel="external">Webpack + vue-loader</a> (o modelo <strong>webpack</strong> do <code>vue-cli</code> já tem isso pré-configurado)</li>
+<li><a href="https://vue-loader.vuejs.org/en/configurations/extract-css.html" target="_blank" rel="external">Webpack + vue-loader</a> (o modelo webpack do <code>vue-cli</code> já tem isso pré-configurado)</li>
 <li><a href="https://github.com/vuejs/vueify#css-extraction" target="_blank" rel="external">Browserify + vueify</a></li>
-<li><a href="https://github.com/znck/rollup-plugin-vue#options" target="_blank" rel="external">Rollup + rollup-plugin-vue</a></li>
+<li><a href="https://vuejs.github.io/rollup-plugin-vue/#/en/2.3/?id=custom-handler" target="_blank" rel="external">Rollup + rollup-plugin-vue</a></li>
 </ul>
 <h2 id="Rastreando-Erros-de-Renderizacao"><a href="#Rastreando-Erros-de-Renderizacao" class="headerlink" title="Rastreando Erros de Renderização"></a>Rastreando Erros de Renderização</h2><p>Se um erro ocorrer durante a execução da renderização de um componente, este será passado para a função global <code>Vue.config.errorHandler</code>, se ela estiver definida. Pode ser uma boa deixar este gancho definido juntamente com um serviço de rastreio de erros como o <a href="https://sentry.io" target="_blank" rel="external">Sentry</a>, o qual possui <a href="https://sentry.io/for/vue/" target="_blank" rel="external">uma integração oficial</a> para o Vue.</p>
 
